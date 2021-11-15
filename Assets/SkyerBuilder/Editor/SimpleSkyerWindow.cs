@@ -7,18 +7,33 @@ using UnityEngine;
 
 namespace NashiraDeer.SkyerBuilder
 {
+    /// <summary>
+    /// A window for Unity Editor having simplified controller for Skyer Builder.
+    /// </summary>
     public class SimpleSkyerWindow : EditorWindow
     {
-        public bool IsBuilding = false;
+        /// <summary>
+        /// The status of the Skyer Engine in this window, used to avoid run <see cref="StartBuild"/> more than one time during GUI updates.
+        /// </summary>
+        public bool IsBuilding { get; private set; } = false;
 
+        /// <summary>
+        /// Settings value database used by this window.
+        /// </summary>
         public SerializedObject Settings = null;
 
-        [MenuItem("Window/Skyer Builder/Simple")]
+        /// <summary>
+        /// Get the window and show it to the user.
+        /// </summary>
+        [MenuItem("Window/Skyer Builder")]
         public static void ShowWindow()
         {
             GetWindow<SimpleSkyerWindow>().Show();
         }
 
+        /// <summary>
+        /// Initialize the window and load the database from the disk.
+        /// </summary>
         private void Awake()
         {
             titleContent = new GUIContent("Skyer Builder");
@@ -33,12 +48,28 @@ namespace NashiraDeer.SkyerBuilder
 
                 AssetDatabase.CreateAsset(settings, "Assets/Editor/Skyer Builder/Simple Settings.asset");
             }
-            
+
             Settings = new SerializedObject(settings);
         }
 
+        /// <summary>
+        /// Save the database on the disk, if the window is closed.
+        /// </summary>
         private void OnDestroy() => SaveChanges();
 
+        /// <summary>
+        /// Save the database on the disk.
+        /// </summary>
+        public override void SaveChanges()
+        {
+            Settings.ApplyModifiedProperties();
+            AssetDatabase.SaveAssets();
+            base.SaveChanges();
+        }
+
+        /// <summary>
+        /// Draw the elements on the window in Unity Editor.
+        /// </summary>
         private void OnGUI()
         {
             GUILayout.Label("Engine Settings", EditorStyles.boldLabel);
@@ -80,10 +111,13 @@ namespace NashiraDeer.SkyerBuilder
             EditorGUILayout.Separator();
             EditorGUILayout.LabelField("Skyer Control Panel", EditorStyles.boldLabel);
 
-            if (GUILayout.Button("Build", GUILayout.Width(118))) Build();
+            if (GUILayout.Button("Build", GUILayout.Width(118))) StartBuild();
         }
 
-        private void Build()
+        /// <summary>
+        /// Starts the building process initializing the Skyer Engine.
+        /// </summary>
+        private void StartBuild()
         {
             if (IsBuilding) throw new InvalidOperationException("Can't build if a already has a build running...");
 
@@ -173,13 +207,6 @@ namespace NashiraDeer.SkyerBuilder
 
             IsBuilding = false;
             EditorUtility.ClearProgressBar();
-        }
-
-        public override void SaveChanges()
-        {
-            Settings.ApplyModifiedProperties();
-            AssetDatabase.SaveAssets();
-            base.SaveChanges();
         }
     }
 }
