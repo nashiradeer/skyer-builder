@@ -7,29 +7,36 @@ using UnityEditor.Build.Reporting;
 namespace NashiraDeer.SkyerBuilder
 {
     /// <summary>
-    /// A step to be followed by the <see cref="SkyerEngine"/>.
+    /// A step with the build options and target for <see cref="SkyerEngine"/> that gonna be built.
     /// </summary>
     public class SkyerBuildStep
     {
         /// <summary>
-        /// Platform target for this step.
+        /// Target platform to be built in this step.
         /// </summary>
         public SkyerTarget Target = SkyerTarget.Unknown;
 
         /// <summary>
-        /// <see cref="BuildOptions"/> used in this step.
+        /// Unity <see cref="BuildOptions"/> to be provided for Unity Build Pipeline during this step.
         /// </summary>
         public BuildOptions Options = BuildOptions.None;
 
         /// <summary>
-        /// Initialize a Skyer Build Step with target and options defined.
+        /// Scenes to be built in this step.
         /// </summary>
-        /// <param name="target">Skyer Target used by this step.</param>
-        /// <param name="options">Unity Build Options used by this step.</param>
-        public SkyerBuildStep(SkyerTarget target, BuildOptions options)
+        public string[] Scenes = { };
+
+        /// <summary>
+        /// Initialize a Skyer Build Step with a platform target, build options and scenes predefined.
+        /// </summary>
+        /// <param name="target">Platform target for this step.</param>
+        /// <param name="options">Unity Build Options used in this step.</param>
+        /// <param name="scenes">Scenes to be built in this step.</param>
+        public SkyerBuildStep(SkyerTarget target, BuildOptions options, string[] scenes)
         {
             Target = target;
             Options = options;
+            Scenes = scenes;
         }
     }
 
@@ -39,23 +46,23 @@ namespace NashiraDeer.SkyerBuilder
     public class SkyerBuildReport
     {
         /// <summary>
-        /// Step executed during the build.
+        /// Step executed that has returned this report.
         /// </summary>
         public SkyerBuildStep Step = null;
 
         /// <summary>
-        /// Report returned by the Unity Build Pipeline.
+        /// Build Report returned by the Unity Build Pipeline.
         /// </summary>
         public BuildReport Report = null;
     }
 
     /// <summary>
-    /// Platform targets used by the <see cref="SkyerEngine"/> and <see cref="SkyerSettings"/>, represents a simplified and crossversion target from <see cref="BuildTarget"/> and <see cref="BuildTargetGroup"/>.
+    /// Platform targets used by the <see cref="SkyerEngine"/>, represents a simplified target from <see cref="BuildTarget"/> and <see cref="BuildTargetGroup"/> used in Unity.
     /// </summary>
-    public enum SkyerTarget : int
+    public enum SkyerTarget : byte
     {
         /// <summary>
-        /// Default value of <see cref="SkyerTarget"/>, doesn't represent any platform.
+        /// The default value of <see cref="SkyerTarget"/>, doesn't represent any platform.
         /// </summary>
         Unknown = 0,
 
@@ -72,90 +79,80 @@ namespace NashiraDeer.SkyerBuilder
         /// <summary>
         /// Represents the Standalone Player for Linux 64-bits.
         /// </summary>
-        Linux = 4,
-
-        /// <summary>
-        /// Represents the Standalone Player for Linux 32-bits.
-        /// </summary>
-        Linux32 = 8,
-
-        /// <summary>
-        /// Represents the Standalone Player for Linux 32-bits and 64-bits.
-        /// </summary>
-        LinuxUniversal = 16,
+        Linux = 3,
 
         /// <summary>
         /// Represents the Standalone Player for MacOS Intel.
         /// </summary>
-        Mac = 32,
+        Mac = 4,
 
         /// <summary>
         /// Represents the WebGL Player.
         /// </summary>
-        WebGL = 64,
+        WebGL = 5,
 
         /// <summary>
         /// Represents the Universal Windows Platform Player.
         /// </summary>
-        WSA = 128,
+        WSA = 6,
 
         /// <summary>
         /// Represents the Android Player.
         /// </summary>
-        Android = 256,
+        Android = 7,
 
         /// <summary>
         /// Represents the iOS Player.
         /// </summary>
-        iOS = 512,
+        iOS = 8,
 
         /// <summary>
         /// Represents the PlayStation 4 Player.
         /// </summary>
-        PS4 = 1024,
+        PS4 = 9,
 
         /// <summary>
         /// Represents the PlayStation 5 Player.
         /// </summary>
-        PS5 = 2048,
+        PS5 = 10,
 
         /// <summary>
         /// Represents the Xbox One Player.
         /// </summary>
-        XboxOne = 4096,
+        XboxOne = 11,
 
         /// <summary>
         /// Represents the Nintendo Switch Player.
         /// </summary>
-        Switch = 8192,
+        Switch = 12,
 
         /// <summary>
         /// Represents the Google Stadia Player.
         /// </summary>
-        Stadia = 16384,
+        Stadia = 13,
 
         /// <summary>
         /// Represents the tvOS Player.
         /// </summary>
-        tvOS = 32768,
+        tvOS = 14,
 
         /// <summary>
         /// Represents the CloudRendering Player.
         /// </summary>
-        CloudRendering = 65536
+        CloudRendering = 15
     }
 
     /// <summary>
-    /// The build engine used by the Skyer Builder.
+    /// The default build engine used by the Skyer Builder to organize and automatize the builds.
     /// </summary>
     public class SkyerEngine
     {
         /// <summary>
-        /// Resolve the <see cref="SkyerTarget"/> to a <see cref="BuildTarget"/> to be used in <see cref="BuildPipeline"/>.
+        /// Resolve a target from Skyer to a target from Unity to be used in Unity Build Pipeline.
         /// </summary>
-        /// <param name="skyerTarget">Platform Target from Skyer Builder.</param>
-        /// <returns>Build Target used the Unity Build Pipeline.</returns>
-        public static BuildTarget GetTarget(SkyerTarget skyerTarget)
+        /// <param name="skyerTarget">Platform target from Skyer Builder.</param>
+        /// <returns>Build Target from Unity.</returns>
+        public static BuildTarget ResolveBuildTarget(SkyerTarget skyerTarget)
         {
             switch (skyerTarget)
             {
@@ -179,13 +176,13 @@ namespace NashiraDeer.SkyerBuilder
         }
 
         /// <summary>
-        /// Resolve the <see cref="SkyerTarget"/> to a <see cref="BuildTargetGroup"/> to be used in <see cref="BuildPipeline"/>.
+        /// Resolve a target from Skyer to a target group from Unity to be used in Unity Build Pipeline.
         /// </summary>
-        /// <param name="skyerTarget">Platform Target from Skyer Builder.</param>
-        /// <returns>Build Target Group used the Unity Build Pipeline.</returns>
-        public static BuildTargetGroup GetTargetGroup(SkyerTarget skyerTarget)
+        /// <param name="skyerTarget">Platform target from Skyer Builder.</param>
+        /// <returns>Build Target Group from Unity.</returns>
+        public static BuildTargetGroup ResolveTargetGroup(SkyerTarget skyerTarget)
         {
-            switch(skyerTarget)
+            switch (skyerTarget)
             {
                 case SkyerTarget.Windows:
                 case SkyerTarget.Windows32:
@@ -207,63 +204,96 @@ namespace NashiraDeer.SkyerBuilder
         }
 
         /// <summary>
-        /// Directory path for putting the players builded by this engine.
+        /// Resolve a build path to be compatible with the location path used in Unity Build Pipeline.
+        /// </summary>
+        /// <param name="buildpath">Build path to be resolved.</param>
+        /// <param name="target">Platform target used to determine the changes for the build path.</param>
+        /// <returns>A location path ready to be used in Unity Build Pipeline.</returns>
+        public static string ResolveLocationPath(string buildpath, SkyerTarget target)
+        {
+            switch (target)
+            {
+                case SkyerTarget.Windows:
+                case SkyerTarget.Windows32:
+                    return Path.Combine(buildpath, PlayerSettings.productName + ".exe");
+                case SkyerTarget.Mac:
+                    return Path.Combine(buildpath, PlayerSettings.productName);
+                case SkyerTarget.Linux:
+                    return Path.Combine(buildpath, PlayerSettings.productName.Replace(" ", "") + ".x86_64");
+                case SkyerTarget.Android:
+                    return Path.Combine(buildpath, PlayerSettings.productName + ".apk");
+                default:
+                    return buildpath;
+            }
+        }
+
+        /// <summary>
+        /// Callback called every time that a step is built during the <see cref="BatchBuild(SkyerBuildStep[], SkyerBuildProgress)"/>.
+        /// </summary>
+        /// <param name="report">The report from the last build.</param>
+        /// <param name="builded">The steps that already has built.</param>
+        /// <param name="total">Total of steps to be built.</param>
+        /// <returns>If true, the batch build is cancelled.</returns>
+        public delegate bool SkyerBuildProgress(SkyerBuildReport report, int builded, int total);
+
+        /// <summary>
+        /// Directory to place the players built by this Skyer Engine.
         /// </summary>
         public string BuildPath { get; set; }
 
         /// <summary>
-        /// Initialize a <see cref="SkyerEngine"/> with a custom resolver.
+        /// Create a new Skyer Engine specifying a path to place the builds.
         /// </summary>
-        /// <param name="buildpath">Directory path for putting the players builded by this engine.</param>
-        /// <param name="resolver">A custom target resolver.</param>
+        /// <param name="buildpath">Directory to place the players built by this Skyer Engine.</param>
         public SkyerEngine(string buildpath)
         {
             BuildPath = buildpath;
         }
 
         /// <summary>
-        /// Starts the build engine, building the steps specified in <paramref name="steps"/> using the scenes specified in <paramref name="scenes"/>.
+        /// Starts the build engine, building only a player.
         /// </summary>
-        /// <param name="steps">Steps for the build.</param>
-        /// <param name="scenes">Scenes to be added in the builds.</param>
-        /// <returns>All <see cref="BuildReport"/> returned by the Unity BuildPipeline.</returns>
-        public SkyerBuildReport[] Build(SkyerBuildStep[] steps, string[] scenes, Func<SkyerBuildReport, int, int, bool> progressCb)
+        /// <param name="step">A single step to be built.</param>
+        /// <returns>Build report containing information about this build.</returns>
+        public SkyerBuildReport Build(SkyerBuildStep step)
         {
-            int finalized = 0;
+            BuildPlayerOptions options = new BuildPlayerOptions();
+            options.scenes = step.Scenes;
+            options.target = ResolveBuildTarget(step.Target);
+            options.targetGroup = ResolveTargetGroup(step.Target);
+            options.options = step.Options;
 
-            List<SkyerBuildReport> result = new List<SkyerBuildReport>();
+            string buildpath = Path.Combine(BuildPath, step.Target.ToString());
+            Directory.CreateDirectory(buildpath);
+            options.locationPathName = ResolveLocationPath(buildpath, step.Target);
 
-            foreach (SkyerBuildStep step in steps)
+            SkyerBuildReport buildReport = new SkyerBuildReport();
+            buildReport.Step = step;
+            buildReport.Report = BuildPipeline.BuildPlayer(options);
+
+            return buildReport;
+        }
+
+        /// <summary>
+        /// Starts the build engine, building a batch of steps.
+        /// </summary>
+        /// <param name="steps">Steps to be built, one by one.</param>
+        /// <param name="progress">A progress callback executed at the end of every step.</param>
+        /// <returns>An array with all the <see cref="SkyerBuildReport"/> returned by the <see cref="Build(SkyerBuildStep)"/>.</returns>
+        public SkyerBuildReport[] BatchBuild(SkyerBuildStep[] steps, SkyerBuildProgress progress)
+        {
+            List<SkyerBuildReport> results = new List<SkyerBuildReport>();
+
+            for (int i = 0; i < steps.Length; i++)
             {
-                BuildPlayerOptions options = new BuildPlayerOptions();
-                options.scenes = scenes;
-                options.target = GetTarget(step.Target);
-                options.targetGroup = GetTargetGroup(step.Target);
-                options.options = step.Options;
-                options.locationPathName = Path.Combine(BuildPath, step.Target.ToString());
+                SkyerBuildReport buildReport = Build(steps[i]);
 
-                Directory.CreateDirectory(options.locationPathName);
+                results.Add(buildReport);
 
-                if (step.Target == SkyerTarget.Windows || step.Target == SkyerTarget.Windows32) options.locationPathName = Path.Combine(options.locationPathName, PlayerSettings.productName + ".exe");
-                if (step.Target == SkyerTarget.Mac) options.locationPathName = Path.Combine(options.locationPathName, PlayerSettings.productName);
-                if (step.Target == SkyerTarget.Linux) options.locationPathName = Path.Combine(options.locationPathName, PlayerSettings.productName.Replace(" ", "") + ".x86_64");
-                if (step.Target == SkyerTarget.Android) options.locationPathName = Path.Combine(options.locationPathName, PlayerSettings.productName + ".apk");
-
-                SkyerBuildReport buildReport = new SkyerBuildReport();
-                buildReport.Step = step;
-                buildReport.Report = BuildPipeline.BuildPlayer(options);
-
-                result.Add(buildReport);
-
-                finalized++;
-
-                if (progressCb != null)
-                {
-                    if (progressCb(buildReport, finalized, steps.Length)) break;
-                }
+                if (progress(buildReport, i + 1, steps.Length)) break;
             }
 
-            return result.ToArray();
+            return results.ToArray();
         }
     }
 }
