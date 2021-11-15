@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Skyer Builder
+*.tgz
+Assets/Editor/Skyer Builder/**
+Assets/Editor/Skyer Builder.meta
