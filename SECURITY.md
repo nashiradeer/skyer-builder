@@ -17,6 +17,26 @@
 |   2019.4 | :white_check_mark: |
 | < 2019.3 | :x:                |
 
+## Supported Targets
+
+| Version           | Supported          | Tested             |
+| ----------------- | ------------------ | ------------------ |
+| Windows x86       | :white_check_mark: | :white_check_mark: |
+| Windows x64       | :white_check_mark: | :white_check_mark: |
+| Linux x64         | :white_check_mark: | :white_check_mark: |
+| MacOSX (Intel 64) | :white_check_mark: | :white_check_mark: |
+| WebGL             | :white_check_mark: | :white_check_mark: |
+| WSA               | :white_check_mark: | :x:                |
+| Android           | :white_check_mark: | :white_check_mark: |
+| iOS               | :white_check_mark: | :x:                |
+| PS4               | :white_check_mark: | :x:                |
+| PS5               | :white_check_mark: | :x:                |
+| Xbox One          | :white_check_mark: | :x:                |
+| Switch            | :white_check_mark: | :x:                |
+| Stadia            | :white_check_mark: | :x:                |
+| tvOS              | :white_check_mark: | :x:                |
+| CloudRendering    | :white_check_mark: | :x:                |
+
 ## Reporting a Vulnerability
 
 If you found any type of vulnerability, please report using the GitHub Security Advisories, 
