@@ -9,7 +9,7 @@
 ## Supported Unity Versions
 
 | Version  | Supported          |
-| -------- | ------------------ |
+| -------: | ------------------ |
 |   2022.x | :x:                |
 |   2021.x | :x:                |
 |   2020.3 | :white_check_mark: |
