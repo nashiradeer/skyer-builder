@@ -1,11 +1,11 @@
 {
-  "name": "com.nashiradeer.skyerbuilder",
+  "name": "dev.deersoftware.skyerbuilder",
   "version": "1.0.0",
   "displayName": "Skyer Builder",
   "description": "Skyer Builder is a tool to help you build your application to multiple platforms with one click.",
   "unity": "2019.4",
-  "changelogUrl": "https://github.com/NashiraDeer/Unity-SkyerBuilder/releases",
-  "licensesUrl": "https://github.com/NashiraDeer/Unity-SkyerBuilder/LICENSE",
+  "changelogUrl": "https://gitlab.com/deersoftware/skyerbuilder/-/releases",
+  "licensesUrl": "https://gitlab.com/deersoftware/skyerbuilder/-/blob/dev/LICENSE",
   "dependencies": { },
   "keywords": [
     "multibuild",
@@ -13,8 +13,8 @@
     "skyerbuilder"
   ],
   "author": {
-    "name": "Nashira Deer",
-    "email": "contact@nashiradeer.tk"
+    "name": "DeerSoftware",
+    "email": "contact@deersoftware.dev"
   }
 }
   
