@@ -4,7 +4,7 @@ Skyer Builder is a tool created to help you build your game or application in Un
 
 ## What exactly does Skyer Builder do?
 
-The Skyer Builder creates a standard of the targets provided by Unity to be cross version and unify the target and target group in only one enumeration value, simplifying the build process from code, this is necessary to another function of the Skyer Builder, that is the possibility of build, multiple Unity Players, using a step system that can be accessed from code or Unity Editor UI.
+The Skyer Builder creates a standard of the targets provided by Unity to be cross version and unify the target and target group in only one enumeration value, simplifying the build process from code, this is necessary to another function of the Skyer Builder, which is the possibility of build, multiple Unity Players, using a step system that can be accessed from code or Unity Editor UI.
 
 ## How to use Skyer Builder?
 
@@ -18,8 +18,8 @@ If this occurs, you can do two things to solve this question. You can create an 
 
 ## How to download Skyer Builder?
 
-Go to the [Releases tab](https://github.com/NashiraDeer/Unity-SkyerBuilder/releases) and from the latest version choose the file ending with .tgz (Not the packet Source Code), after download, on Unity, open the `Unity Package Manager` and click to add a package from a tarball, selecting the file that you has downloaded on the last step and ready! You already can use Skyer Builder on your project!
+Go to the [Releases tab](https://gitlab.com/deersoftware/skyerbuilder/-/releases) and from the latest version choose the file ending with .tgz (Not the packet Source Code), after download, on Unity, open the `Unity Package Manager` and click to add a package from a tarball, selecting the file that you has downloaded on the last step and ready! You already can use Skyer Builder on your project!
 
 ## Credits
 
-The Skyer Builder is idealized and created by [NashiraDeer](https://github.com/NashiraDeer), licensed with the [MIT License](https://github.com/NashiraDeer/Unity-SkyerBuilder/blob/master/LICENSE) to anyone who can use, modify and distribute your Skyer Builder.
+The Skyer Builder is idealized and created by [NashiraDeer](https://gitlab.com/NashiraDeer), licensed with the [MIT License](https://gitlab.com/deersoftware/skyerbuilder/-/blob/main/LICENSE.txt) to anyone who can use, modify and distribute your Skyer Builder.
