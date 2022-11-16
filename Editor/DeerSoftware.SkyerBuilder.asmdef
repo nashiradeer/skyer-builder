@@ -1,6 +1,6 @@
 {
-    "name": "NashiraDeer.SkyerBuilder",
-    "rootNamespace": "NashiraDeer.SkyerBuilder",
+    "name": "DeerSoftware.SkyerBuilder",
+    "rootNamespace": "DeerSoftware.SkyerBuilder",
     "references": [],
     "includePlatforms": [
         "Editor"
