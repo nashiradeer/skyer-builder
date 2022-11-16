@@ -2,18 +2,16 @@
 
 ## Supported Versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-|  1.0.x  | :white_check_mark: |
-
-## Supported Unity Versions
-
-| Version  | Supported           |
-| -------: | ------------------- |
-|   2022.x | :x:                 |
-|   2021.x | :x:                 |
-|   2020.3 | :white_check_mark:  |
-|   2019.4 | :white_check_mark:  |
+| Version | Unity    | Supported          |
+| :-----: | -------: | ------------------ |
+|   1.0   | > 2019.3 | :x:                |
+|   1.0   |   2019.4 | :white_check_mark: |
+|   1.0   | > 2020.2 | :x:                |
+|   1.0   |   2020.3 | :white_check_mark: |
+|   1.0   | < 2021.1 | :x:                |
+|   2.0   | > 2021.2 | :x:                |
+|   2.0   |   2021.3 | :white_check_mark: |
+|   2.0   |   2022.1 | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
