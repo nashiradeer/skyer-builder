@@ -1,7 +1,7 @@
 namespace DeerSoftware.SkyerBuilder
 {
     /// <summary>
-    /// All subtargets supported by Skyer Builder.
+    /// All sub-targets supported by Skyer Builder.
     /// </summary>
     public enum SkyerSubtarget : int
     {
@@ -11,7 +11,7 @@ namespace DeerSoftware.SkyerBuilder
         None = 0,
 
         /// <summary>
-        /// Standalone Server subtarget.
+        /// Standalone Server sub-target.
         /// </summary>
         Server = 1,
 
@@ -41,17 +41,17 @@ namespace DeerSoftware.SkyerBuilder
         PVRTC = 6,
 
         /// <summary>
-        /// Xbox One subtarget, Master.
+        /// Xbox One sub-target, Master.
         /// </summary>
         Master = 7,
 
         /// <summary>
-        /// Xbox One subtarget, Debug.
+        /// Xbox One sub-target, Debug.
         /// </summary>
         Debug = 8,
 
         /// <summary>
-        /// PlayStation 4 subtarget, Package.
+        /// PlayStation 4 sub-target, Package.
         /// </summary>
         Package = 9,
     }
