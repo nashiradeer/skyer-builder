@@ -39,6 +39,10 @@ namespace DeerSoftware.SkyerBuilder
         /// Android.
         /// </summary>
         Android = 6,
+
+        /// <summary>
+        /// iOS.
+        /// </summary>
         iOS = 7,
 
         /// <summary>
