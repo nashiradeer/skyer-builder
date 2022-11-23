@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEditor;
 
 namespace DeerSoftware.SkyerBuilder
@@ -180,7 +181,7 @@ namespace DeerSoftware.SkyerBuilder
         }
 
         /// <summary>
-        /// Converts a Skyer target to a Unity compatible.
+        /// Converts a Skyer target to a Target compatible with Unity.
         /// </summary>
         /// <param name="target">Target to be converted.</param>
         /// <returns>Target compatible with the Unity Build Pipeline.</returns>
@@ -204,6 +205,59 @@ namespace DeerSoftware.SkyerBuilder
                 case SkyerTarget.WSA: return BuildTarget.WSAPlayer;
                 case SkyerTarget.LinuxHeadlessSimulation: return BuildTarget.LinuxHeadlessSimulation;
                 default: throw new NotSupportedException("Can't convert from Skyer Target to Build Target");
+            }
+        }
+
+        /// <summary>
+        /// Converts a Skyer target to a Target Group compatible with Unity.
+        /// </summary>
+        /// <param name="target">Target to be converted.</param>
+        /// <returns>Target Group compatible with the Unity Build Pipeline.</returns>
+        /// <exception cref="NotSupportedException">Throwed when a invalid <paramref name="target"/> is used.</exception>
+        public static BuildTargetGroup ToBuildTargetGroup(SkyerTarget target)
+        {
+            switch (target)
+            {
+                case SkyerTarget.Windows32:
+                case SkyerTarget.Windows:
+                case SkyerTarget.Linux:
+                case SkyerTarget.Mac: return BuildTargetGroup.Standalone;
+                case SkyerTarget.WebGL: return BuildTargetGroup.WebGL;
+                case SkyerTarget.Android: return BuildTargetGroup.Android;
+                case SkyerTarget.iOS: return BuildTargetGroup.iOS;
+                case SkyerTarget.XboxOne: return BuildTargetGroup.XboxOne;
+                case SkyerTarget.PS4: return BuildTargetGroup.PS4;
+                case SkyerTarget.PS5: return BuildTargetGroup.PS5;
+                case SkyerTarget.Switch: return BuildTargetGroup.Switch;
+                case SkyerTarget.Stadia: return BuildTargetGroup.Stadia;
+                case SkyerTarget.WSA: return BuildTargetGroup.WSA;
+                case SkyerTarget.LinuxHeadlessSimulation: return BuildTargetGroup.LinuxHeadlessSimulation;
+                default: throw new NotSupportedException("Can't convert from Skyer Target to Build Target");
+            }
+        }
+
+        /// <summary>
+        /// Modify the <paramref name="path"/> to be compatible with the location path required for determined target.
+        /// </summary>
+        /// <param name="target">Target used to detect the necessary modifications.</param>
+        /// <param name="path">Output path to place the compiled files.</param>
+        /// <param name="name">Product or binary name for some targets.</param>
+        /// <returns>Location path ready to be used.</returns>
+        public static string FixLocationPath(SkyerTarget target, string path, string name)
+        {
+            switch (target)
+            {
+                case SkyerTarget.Windows:
+                case SkyerTarget.Windows32:
+                    return Path.Combine(path, name.Trim() + ".exe");
+                case SkyerTarget.Mac:
+                    return Path.Combine(path, name);
+                case SkyerTarget.Linux:
+                    return Path.Combine(path, name.Replace(" ", "") + ".x86_64");
+                case SkyerTarget.Android:
+                    return Path.Combine(path, name + ".apk");
+                default:
+                    return path;
             }
         }
     }
