@@ -178,5 +178,33 @@ namespace DeerSoftware.SkyerBuilder
                     throw new NotSupportedException("Can't found a sub-target int for a target and/or subtarget");
             }
         }
+
+        /// <summary>
+        /// Converts a Skyer target to a Unity compatible.
+        /// </summary>
+        /// <param name="target">Target to be converted.</param>
+        /// <returns>Target compatible with the Unity Build Pipeline.</returns>
+        /// <exception cref="NotSupportedException">Throwed when a invalid <paramref name="target"/> is used.</exception>
+        public static BuildTarget ToBuildTarget(SkyerTarget target)
+        {
+            switch (target)
+            {
+                case SkyerTarget.Windows32: return BuildTarget.StandaloneWindows;
+                case SkyerTarget.Windows: return BuildTarget.StandaloneWindows64;
+                case SkyerTarget.Linux: return BuildTarget.StandaloneLinux64;
+                case SkyerTarget.Mac: return BuildTarget.StandaloneOSX;
+                case SkyerTarget.WebGL: return BuildTarget.WebGL;
+                case SkyerTarget.Android: return BuildTarget.Android;
+                case SkyerTarget.iOS: return BuildTarget.iOS;
+                case SkyerTarget.XboxOne: return BuildTarget.XboxOne;
+                case SkyerTarget.PS4: return BuildTarget.PS4;
+                case SkyerTarget.PS5: return BuildTarget.PS5;
+                case SkyerTarget.Switch: return BuildTarget.Switch;
+                case SkyerTarget.Stadia: return BuildTarget.Stadia;
+                case SkyerTarget.WSA: return BuildTarget.WSAPlayer;
+                case SkyerTarget.LinuxHeadlessSimulation: return BuildTarget.LinuxHeadlessSimulation;
+                default: throw new NotSupportedException("Can't convert from Skyer Target to Build Target");
+            }
+        }
     }
 }
