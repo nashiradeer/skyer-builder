@@ -260,5 +260,23 @@ namespace DeerSoftware.SkyerBuilder
                     return path;
             }
         }
+
+        /// <summary>
+        /// Generates a Build Player Options from Skyer.
+        /// </summary>
+        /// <param name="platform">Platform to generate the Build Player Options.</param>
+        /// <param name="path">Output path to place the compiled files.</param>
+        /// <param name="name">Product or binary name for some targets.</param>
+        /// <returns>Generated Build Player Options, you still need to set scenes or anything you want in the returned Build Player Options.</returns>
+        public static BuildPlayerOptions ToBuildPlayerOptions(SkyerPlatform platform, string path, string name)
+        {
+            return new BuildPlayerOptions()
+            {
+                locationPathName = FixLocationPath(platform.Target, path, name),
+                target = ToBuildTarget(platform.Target),
+                targetGroup = ToBuildTargetGroup(platform.Target),
+                subtarget = FromSkyerSubtarget(platform.Target, platform.Subtarget),
+            };
+        }
     }
 }
