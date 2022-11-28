@@ -31,24 +31,34 @@ namespace DeerSoftware.SkyerBuilder
             if ((configFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(configFoldout, "Configuration")))
             {
                 EditorGUILayout.BeginHorizontal();
+
                 outputPath = EditorGUILayout.TextField("Output Path", "");
+
                 if (GUILayout.Button("...", GUILayout.ExpandWidth(false)))
                     outputPath = EditorUtility.SaveFolderPanel("Choosing Output Path...", outputPath, PlayerSettings.productName);
+
                 EditorGUILayout.EndHorizontal();
             }
+
             EditorGUILayout.EndFoldoutHeaderGroup();
 
             if ((addTargetFoldout = EditorGUILayout.BeginFoldoutHeaderGroup(addTargetFoldout, "Add Target")))
             {
                 int newTarget = EditorGUILayout.Popup("Target", target, Enum.GetNames(typeof(SkyerTarget)).Skip(1).ToArray());
+
                 if (newTarget != target)
                     subtarget = 0;
+
                 target = newTarget;
+
                 SkyerTarget selectedTarget = (SkyerTarget)target + 1;
 
                 SkyerSubtarget[] subtargets = SkyerUtils.GetSkyerSubtargets(selectedTarget);
+
                 string[] subtargetOptions = GetExtraSubtargets(selectedTarget, subtargets);
+
                 subtarget = EditorGUILayout.Popup("Sub-target", subtarget, subtargetOptions);
+
                 SkyerSubtarget selectedSubtarget = subtargets[subtarget];
 
                 if (GUILayout.Button("Add"))
@@ -58,6 +68,7 @@ namespace DeerSoftware.SkyerBuilder
                         Target = selectedTarget,
                         Subtarget = selectedSubtarget,
                     };
+
                     if (!targets.Contains(platform))
                         targets.Add(platform);
                 }
@@ -68,9 +79,12 @@ namespace DeerSoftware.SkyerBuilder
         private string[] GetExtraSubtargets(SkyerTarget target, SkyerSubtarget[] subtargets)
         {
             List<string> subtargetNames = new List<string>();
+
             subtargetNames.Add(SkyerUtils.GetDefaultSubtargetName(target));
+
             for (int i = 1; i < subtargets.Length; i++)
                 subtargetNames.Add(Enum.GetName(typeof(SkyerSubtarget), subtargets[i]));
+
             return subtargetNames.ToArray();
         }
     }
