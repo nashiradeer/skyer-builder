@@ -198,8 +198,10 @@ namespace DeerSoftware.SkyerBuilder
             // Errors number increased for each platform that is cancelled or errored.
             int errors = 0;
 
-            foreach (SkyerPlatform platform in targets)
+            for (int i = 0; i < targets.Count; i++)
             {
+                SkyerPlatform platform = targets[i];
+
                 // Generates the sub-target if isn't 'None'.
                 string subtargetName = "";
 
@@ -209,9 +211,9 @@ namespace DeerSoftware.SkyerBuilder
                 string platformName = $"{platform.Target}{subtargetName}";
 
                 // Update the progress bar and check if build is cancelled.
-                for (int i = 0; i < clocks; i++)
+                for (int o = 0; o < clocks; o++)
                 {
-                    if (EditorUtility.DisplayCancelableProgressBar("Skyer Builder", $"Preparing for building '{platformName}'...", (float)i / clocks))
+                    if (EditorUtility.DisplayCancelableProgressBar("Skyer Builder", $"Preparing for building '{platformName}'...", (float)o / clocks))
                     {
                         // Cancels the execution of the build engine.
                         EditorUtility.ClearProgressBar();
@@ -234,8 +236,8 @@ namespace DeerSoftware.SkyerBuilder
                 // Catch the enabled scenes from Editor Build Settings.
                 List<string> scenes = new List<string>();
 
-                foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
-                    if (scene.enabled) scenes.Add(scene.path);
+                for (int o = 0; o < EditorBuildSettings.scenes.Length; o++)
+                    if (EditorBuildSettings.scenes[o].enabled) scenes.Add(EditorBuildSettings.scenes[o].path);
 
                 options.scenes = scenes.ToArray();
 
