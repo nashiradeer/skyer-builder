@@ -256,6 +256,8 @@ namespace DeerSoftware.SkyerBuilder
                     return Path.Combine(path, name.Replace(" ", "") + ".x86_64");
                 case SkyerTarget.Android:
                     return Path.Combine(path, name + ".apk");
+                case SkyerTarget.WebGL:
+                    return Path.Combine(path, name);
                 default:
                     return path;
             }
