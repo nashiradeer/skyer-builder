@@ -18,7 +18,7 @@ If this occurs, you can do two things to solve this question. You can create an 
 
 ## How to download Skyer Builder?
 
-You can install it from [Unity Asset Store](https://assetstore.unity.com/packages/tools/utilities/skyer-builder-209104) or directly from the [repository on GitLab](https://gitlab.com/deersoftware/skyerbuilder), downloading the [Unity Package from here](https://gitlab.com/deersoftware/skyerbuilder/-/releases) or adding a package from the git URL "https://gitlab.com/deersoftware/skyerbuilder.git" in the Unity Package Manager.
+You can install it from [Unity Asset Store](https://assetstore.unity.com/packages/slug/209104) or directly from the [repository on GitLab](https://gitlab.com/deersoftware/skyerbuilder), downloading the [Unity Package from here](https://gitlab.com/deersoftware/skyerbuilder/-/releases) or adding a package from the git URL "https://gitlab.com/deersoftware/skyerbuilder.git" in the Unity Package Manager.
 
 ## Credits
 
