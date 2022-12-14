@@ -1,12 +1,12 @@
 {
   "name": "dev.deersoftware.skyerbuilder",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "displayName": "Skyer Builder",
   "description": "Skyer Builder is a tool to help you build your application to multiple platforms with one click.",
-  "unity": "2019.4",
+  "unity": "2021.3",
   "changelogUrl": "https://gitlab.com/deersoftware/skyerbuilder/-/releases",
   "licensesUrl": "https://gitlab.com/deersoftware/skyerbuilder/-/blob/dev/LICENSE",
-  "dependencies": { },
+  "dependencies": {},
   "keywords": [
     "multibuild",
     "buildpipeline",
@@ -17,4 +17,3 @@
     "email": "contact@deersoftware.dev"
   }
 }
-  
