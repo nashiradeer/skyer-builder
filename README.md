@@ -2,6 +2,8 @@
 
 Skyer Builder is a tool created to help you build your game or application in Unity to multiple platforms with only one click.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H4NKWWN)
+
 ## What exactly does Skyer Builder do?
 
 The Skyer Builder creates a standard on top of the API provided by Unity to be easier to manipulate than the original, simplifying the build process from code, and making it possible to build multiple Unity Players or use an external UI like a command line or an Editor Window.
