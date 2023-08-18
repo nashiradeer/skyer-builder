@@ -1,6 +1,6 @@
 {
   "name": "dev.deersoftware.skyerbuilder",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "displayName": "Skyer Builder",
   "description": "Skyer Builder is a tool to help you build your application to multiple platforms with one click.",
   "unity": "2021.3",
