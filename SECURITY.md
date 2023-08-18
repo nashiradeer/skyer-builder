@@ -9,4 +9,4 @@
 
 ## Reporting a Vulnerability
 
-If you found any type of vulnerability, please report using our email [security@deersoftware.dev](mailto:security@deersoftware.dev) or using the [GitLab Issues](https://gitlab.com/deersoftware/skyerbuilder/-/issues).
+If you found any type of vulnerability, please report using the [GitHub Issues](https://github.com/nashiradeer/skyer-builder/issues).
