@@ -262,6 +262,9 @@ namespace DeerSoftware.SkyerBuilder
                 // Make the build engine execution remains until wait time.
                 Thread.Sleep(waitTime / clocks);
             }
+
+            // Open the output directory in Explorer/Finder.
+            EditorUtility.RevealInFinder(outputPath);
         }
     }
 }
