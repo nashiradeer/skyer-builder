@@ -30,10 +30,10 @@ namespace DeerSoftware.SkyerBuilder
 
                 case SkyerTarget.XboxOne:
                     return "Development";
-
+#if !UNITY_2022_1_OR_NEWER
                 case SkyerTarget.PS4:
                     return "PCHosted";
-
+#endif
                 default:
                     return "None";
             }
@@ -85,14 +85,14 @@ namespace DeerSoftware.SkyerBuilder
                         SkyerSubtarget.Master,
                         SkyerSubtarget.Debug,
                     };
-
+#if !UNITY_2022_1_OR_NEWER
                 case SkyerTarget.PS4:
                     return new SkyerSubtarget[]
                     {
                         SkyerSubtarget.None,
                         SkyerSubtarget.Package,
                     };
-
+#endif
                 default:
                     return new SkyerSubtarget[]
                     {
@@ -168,13 +168,13 @@ namespace DeerSoftware.SkyerBuilder
                         return (int)XboxBuildSubtarget.Debug;
                     else
                         throw new NotSupportedException("Can't found a sub-target int for a target and/or subtarget");
-
+#if !UNITY_2022_1_OR_NEWER
                 case SkyerSubtarget.Package:
                     if (target == SkyerTarget.PS4)
                         return (int)PS4BuildSubtarget.Package;
                     else
                         throw new NotSupportedException("Can't found a sub-target int for a target and/or subtarget");
-
+#endif
                 default:
                     throw new NotSupportedException("Can't found a sub-target int for a target and/or subtarget");
             }
@@ -204,6 +204,10 @@ namespace DeerSoftware.SkyerBuilder
                 case SkyerTarget.Stadia: return BuildTarget.Stadia;
                 case SkyerTarget.WSA: return BuildTarget.WSAPlayer;
                 case SkyerTarget.LinuxHeadlessSimulation: return BuildTarget.LinuxHeadlessSimulation;
+                case SkyerTarget.tvOS: return BuildTarget.tvOS;
+#if UNITY_2022_1_OR_NEWER
+                case SkyerTarget.VisionOS: return BuildTarget.VisionOS;
+#endif
                 default: throw new NotSupportedException("Can't convert from Skyer Target to Build Target");
             }
         }
@@ -232,6 +236,10 @@ namespace DeerSoftware.SkyerBuilder
                 case SkyerTarget.Stadia: return BuildTargetGroup.Stadia;
                 case SkyerTarget.WSA: return BuildTargetGroup.WSA;
                 case SkyerTarget.LinuxHeadlessSimulation: return BuildTargetGroup.LinuxHeadlessSimulation;
+                case SkyerTarget.tvOS: return BuildTargetGroup.tvOS;
+#if UNITY_2022_1_OR_NEWER
+                case SkyerTarget.VisionOS: return BuildTargetGroup.VisionOS;
+#endif
                 default: throw new NotSupportedException("Can't convert from Skyer Target to Build Target");
             }
         }
