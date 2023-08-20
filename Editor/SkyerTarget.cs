@@ -79,5 +79,17 @@ namespace DeerSoftware.SkyerBuilder
         /// Linux Headless Simulation.
         /// </summary>
         LinuxHeadlessSimulation = 14,
+
+        /// <summary>
+        /// Apple tvOS.
+        /// </summary>
+        tvOS = 15,
+
+#if UNITY_2022_1_OR_NEWER
+        /// <summary>
+        /// Apple visionOS.
+        /// </summary>
+        VisionOS = 16,
+#endif
     }
 }
