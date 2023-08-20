@@ -49,10 +49,11 @@ namespace DeerSoftware.SkyerBuilder
         /// Xbox One sub-target, Debug.
         /// </summary>
         Debug = 8,
-
+#if !UNITY_2022_1_OR_NEWER
         /// <summary>
         /// PlayStation 4 sub-target, Package.
         /// </summary>
         Package = 9,
+#endif
     }
 }
