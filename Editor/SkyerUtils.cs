@@ -288,5 +288,38 @@ namespace DeerSoftware.SkyerBuilder
                 subtarget = FromSkyerSubtarget(platform.Target, platform.Subtarget),
             };
         }
+
+        public static bool SetEditorSettings(SkyerPlatform platform)
+        {
+            if (EditorUserBuildSettings.SwitchActiveBuildTarget(ToBuildTargetGroup(platform.Target), ToBuildTarget(platform.Target))) {
+                switch (platform.Target)
+                {
+                    case SkyerTarget.Windows:
+                    case SkyerTarget.Windows32:
+                    case SkyerTarget.Linux:
+                    case SkyerTarget.Mac:
+                        EditorUserBuildSettings.standaloneBuildSubtarget = (StandaloneBuildSubtarget)FromSkyerSubtarget(platform.Target, platform.Subtarget);
+                        break;
+                    case SkyerTarget.WebGL:
+                        EditorUserBuildSettings.webGLBuildSubtarget = (WebGLTextureSubtarget)FromSkyerSubtarget(platform.Target, platform.Subtarget);
+                        break;
+                    case SkyerTarget.Android:
+                        EditorUserBuildSettings.androidBuildSubtarget = (MobileTextureSubtarget)FromSkyerSubtarget(platform.Target, platform.Subtarget);
+                        break;
+#if !UNITY_2022_1_OR_NEWER
+                case SkyerTarget.PS4:
+                    EditorUserBuildSettings.ps4BuildSubtarget = (PS4BuildSubtarget)FromSkyerSubtarget(platform.Target, platform.Subtarget);
+                    break;
+#endif
+                    case SkyerTarget.XboxOne:
+                        EditorUserBuildSettings.xboxBuildSubtarget = (XboxBuildSubtarget)FromSkyerSubtarget(platform.Target, platform.Subtarget);
+                        break;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
