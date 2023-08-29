@@ -230,6 +230,9 @@ namespace DeerSoftware.SkyerBuilder
                 // Ensures that the platform path exists.
                 Directory.CreateDirectory(platformPath);
 
+                // Sets Editor User Build Settings.
+                SkyerUtils.SetEditorSettings(platform);
+
                 // Generates the Build Player Options for the platform using Skyer Utils.
                 BuildPlayerOptions options = SkyerUtils.ToBuildPlayerOptions(platform, platformPath, PlayerSettings.productName);
 
