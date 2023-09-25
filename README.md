@@ -1,5 +1,7 @@
 # Nashira Deer // Skyer Builder for Unity
 
+**Warning: This project has been deprecated because of the recently created Runtime Fee, showing that Unity Technologies can and will put restrictions on the developers that use Unity, and as an open-source developer I don't want to give more tools and help an environment that is outside the community control as Unity is.**
+
 Skyer Builder is a tool created for the Unity Game Engine that facilitates the process of building the same project for multiple platforms.
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H4NKWWN)
